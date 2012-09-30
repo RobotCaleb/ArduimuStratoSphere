@@ -226,9 +226,9 @@ void Matrix_update(void)
   Gyro_Vector[1]=Gyro_Scaled_Y(read_adc(1)); //gyro y pitch
   Gyro_Vector[2]=Gyro_Scaled_Z(read_adc(2)); //gyro Z yaw
   
-  Accel_Vector[0]=read_adc(3); // acc x
-  Accel_Vector[1]=read_adc(4); // acc y
-  Accel_Vector[2]=read_adc(5); // acc z
+  Accel_Vector[0]=Accel_Scale(read_adc(3)); // acc x
+  Accel_Vector[1]=Accel_Scale(read_adc(4)); // acc y
+  Accel_Vector[2]=Accel_Scale(read_adc(5)); // acc z
   
   Vector_Add(&Omega[0], &Gyro_Vector[0], &Omega_I[0]);  //adding proportional term
   Vector_Add(&Omega_Vector[0], &Omega[0], &Omega_P[0]); //adding Integrator term

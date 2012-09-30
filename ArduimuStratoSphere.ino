@@ -178,8 +178,8 @@ AP_GPS_MTK    GPS(&Serial);
 #endif
 
 
-#define Kp_ROLLPITCH 1.515/GRAVITY
-#define Ki_ROLLPITCH 0.00101/GRAVITY
+#define Kp_ROLLPITCH 0.015
+#define Ki_ROLLPITCH 0.000010
 #define Kp_YAW 1.2
 //#define Kp_YAW 2.5      //High yaw drift correction gain - use with caution!
 #define Ki_YAW 0.00005
