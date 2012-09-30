@@ -87,9 +87,9 @@
 
 // ASCII message toggles
 /* Will print the whole direction cosine matrix */
-#define PRINT_DCM 0
+#define PRINT_DCM 1
 /* Will print the analog raw data */
-#define PRINT_ANALOGS 0
+#define PRINT_ANALOGS 1
 /* Will print the Euler angles roll, pitch, and yaw */
 #define PRINT_EULER 1
 /* Will print GPS data */
@@ -345,8 +345,11 @@ void setup()
 
   #if BOARD_VERSION == 3
   debug_print("You are using Hardware Version 3...");
+  delay(20);
   #endif
 
+  // increasing to prevent init spam
+  GPS.idleTimeout = 2000;
   GPS.init();     // GPS Initialization
 
   debug_handler(0);   //Printing version
