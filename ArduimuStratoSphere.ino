@@ -89,7 +89,7 @@
 /* Will print the whole direction cosine matrix */
 #define PRINT_DCM 0
 /* Will print the analog raw data */
-#define PRINT_ANALOGS 0
+#define PRINT_ANALOGS 1
 /* Will print the Euler angles roll, pitch, and yaw */
 #define PRINT_EULER 1
 /* Will print GPS data */
@@ -165,7 +165,7 @@ AP_GPS_MTK    GPS(&Serial);
 #define BLUE_LED_PIN 6
 #define YELLOW_LED_PIN 5   // Yellow led is not used on ArduIMU v3
 // MPU6000 4g range => g = 4096
-#define GRAVITY 4096  // This equivalent to 1G in the raw data coming from the accelerometer
+#define GRAVITY 8192  // This equivalent to 1G in the raw data coming from the accelerometer
 #define Accel_Scale(x) x*(GRAVITY/9.81)//Scaling the raw data of the accel to actual acceleration in meters for seconds square
 
 // MPU6000 sensibility  (theorical 0.0152 => 1/65.6LSB/deg/s at 500deg/s) (theorical 0.0305 => 1/32.8LSB/deg/s at 1000deg/s) ( 0.0609 => 1/16.4LSB/deg/s at 2000deg/s)
@@ -178,8 +178,8 @@ AP_GPS_MTK    GPS(&Serial);
 #endif
 
 
-#define Kp_ROLLPITCH 0.015
-#define Ki_ROLLPITCH 0.000010
+#define Kp_ROLLPITCH 1.515/GRAVITY
+#define Ki_ROLLPITCH 0.00101/GRAVITY
 #define Kp_YAW 1.2
 //#define Kp_YAW 2.5      //High yaw drift correction gain - use with caution!
 #define Ki_YAW 0.00005
@@ -347,6 +347,7 @@ void setup()
   debug_print("You are using Hardware Version 3...");
   #endif
 
+  GPS.idleTimeout = 2000;
   GPS.init();     // GPS Initialization
 
   debug_handler(0);   //Printing version
